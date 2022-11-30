@@ -74,18 +74,17 @@ button:hover {
     background-position: center;
 }
 
+h1, .body-section {
+    padding: 20px;
+}
+
 .home-title > h1 {
     flex: 1 0 auto;
     background-color: #0006;
-    padding: 20px;
     font-family: 'Norse Bold', sans-serif;
     font-size: 4rem;
     text-align: center;
     color: #fff;
-}
-
-.body-section {
-    padding: 20px;
 }
 
 .body-section:nth-child(even) {
