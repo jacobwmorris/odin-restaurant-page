@@ -1,12 +1,36 @@
+//General
+function makeTextElement(type, content) {
+    const textElem = document.createElement(type);
+    textElem.textContent = content;
+    return textElem;
+}
+
+function makeClassDiv(className) {
+    const div = document.createElement("div");
+    div.classList.add(className);
+    return div;
+}
+
+function makeList(listItems) {
+    const list = document.createElement("ul");
+
+    for (const item of listItems) {
+        list.appendChild(makeTextElement("li", item));
+    }
+    return list;
+}
+
+//Header/Nav
 function makeNavItem(tabName, isSelected) {
+    const navItem = document.createElement("li");
+
     const navButton = document.createElement("button");
     navButton.textContent = tabName;
     if (isSelected) {
         navButton.classList.add("nav-selected");
     }
-
-    const navItem = document.createElement("li");
     navItem.appendChild(navButton);
+
     return navItem;
 }
 
@@ -15,7 +39,8 @@ function makeNavItemList() {
     navItemList.classList.add("nav-items");
 
     navItemList.appendChild(makeNavItem("Home", true));
-    //TODO: menu and contact items
+    navItemList.appendChild(makeNavItem("Menu", false));
+    navItemList.appendChild(makeNavItem("Contact", false));
     return navItemList;
 }
 
@@ -30,22 +55,15 @@ function makeNav() {
     return nav;
 }
 
-function makeTextElement(type, content) {
-    const textElem = document.createElement(type);
-    textElem.textContent = content;
-    return textElem;
-}
-
+//Home tab
 function makeHomeTitle() {
-    const homeTitle = document.createElement("div");
-    homeTitle.classList.add("home-title");
+    const homeTitle = makeClassDiv("home-title");
     homeTitle.appendChild(makeTextElement("h1", "Odin's Chicken Wings"));
     return homeTitle;
 }
 
 function makeChickenSection() {
-    const section = document.createElement("div");
-    section.classList.add("body-section");
+    const section = makeClassDiv("body-section");
     section.appendChild(makeTextElement("h2", "Divine Quality Chicken"));
     section.appendChild(makeTextElement("p", "The best wings in all the nine realms! \
         Odin's serves only the finest free range \
@@ -55,8 +73,7 @@ function makeChickenSection() {
 }
 
 function makeHoursSection() {
-    const section = document.createElement("div");
-    section.classList.add("body-section");
+    const section = makeClassDiv("body-section");
     section.appendChild(makeTextElement("h2", "Hours"));
 
     const hourList = document.createElement("ul");
@@ -73,16 +90,14 @@ function makeHoursSection() {
 }
 
 function makeLocationSection() {
-    const section = document.createElement("div");
-    section.classList.add("body-section");
+    const section = makeClassDiv("body-section");
     section.appendChild(makeTextElement("h2", "Location"));
     section.appendChild(makeTextElement("p", "123 Valhalla Street, Asgard"));
     return section;
 }
 
 function makeHomeTab() {
-    const tab = document.createElement("div");
-    tab.classList.add("tab");
+    const tab = makeClassDiv("tab");
     tab.appendChild(makeHomeTitle());
     tab.appendChild(makeChickenSection());
     tab.appendChild(makeHoursSection());
@@ -90,6 +105,37 @@ function makeHomeTab() {
     return tab;
 }
 
+//Menu tab
+function makeChickenSection2() {//TODO: Name
+    const section = makeClassDiv("body-section");
+    section.appendChild(makeTextElement("h2", "Chicken"));
+    section.appendChild(makeList(["6 Wings", "12 Wings", "Chicken Breast"]));
+    return section;
+}
+
+function makeSauceSection() {
+    const section = makeClassDiv("body-section");
+    section.appendChild(makeTextElement("h2", "Wing Sauces"));
+    section.appendChild(makeList(["Mild", "Medium", "Hot", "Flames of Muspelheim"]));
+    return section;
+}
+
+function makeSideSection() {
+    const section = makeClassDiv("body-section");
+    section.appendChild(makeTextElement("h2", "Sides"));
+    section.appendChild(makeList(["French Fries", "Slaw", "Baked Beans", "Mac & Cheese"]));
+    return section;
+}
+
+function makeMenuTab() {
+    const tab = makeClassDiv("tab");
+    tab.appendChild(makeChickenSection2());
+    tab.appendChild(makeSauceSection());
+    tab.appendChild(makeSideSection());
+    return tab;
+}
+
+//Footer
 function makeLink(text, href) {
     const link = document.createElement("a");
     link.textContent = text;
@@ -120,10 +166,12 @@ function makeFooter() {
     return footer;
 }
 
+//Generate initial page
 function makeInitialPage() {
     const content = document.querySelector("#content");
     content.appendChild(makeNav());
-    content.appendChild(makeHomeTab());
+    //content.appendChild(makeHomeTab());
+    content.appendChild(makeMenuTab());
     content.appendChild(makeFooter());
 }
 
